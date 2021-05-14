@@ -1,11 +1,10 @@
 function CustomMeme({ customMeme, handleChangeCustomMeme }) {
   return (
     <img
+      className="meme"
       src={customMeme}
       onChange={handleChangeCustomMeme}
       alt="This is your custom meme"
-      maximum-width="400px"
-      maximum-height="400px"
     />
   );
 }

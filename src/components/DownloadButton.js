@@ -36,6 +36,7 @@ function DownloadButton({ customMeme }) {
         console.log(err);
       });
   };
+
   return (
     <button
       css={button}

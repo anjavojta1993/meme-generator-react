@@ -23,6 +23,7 @@ function Inputs({
       <label htmlFor="character">
         Enter a character:
         <input
+          className="userInput"
           type="text"
           id="character"
           value={image}
@@ -34,6 +35,7 @@ function Inputs({
       <label htmlFor="top-text">
         Enter a top text:
         <input
+          className="userInput"
           type="text"
           id="top-text"
           value={topText}
@@ -44,6 +46,7 @@ function Inputs({
       <label htmlFor="bottom-text">
         Enter a bottom text:
         <input
+          className="userInput"
           type="text"
           id="bottom-text"
           value={bottomText}
