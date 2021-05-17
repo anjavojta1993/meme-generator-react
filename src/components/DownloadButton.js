@@ -16,34 +16,38 @@ const button = css`
 `;
 
 function DownloadButton({ customMeme }) {
-  const download = (e) => {
-    console.log(e.target.href);
-    fetch(e.target.href, {
-      method: 'GET',
-      headers: {},
-    })
-      .then((response) => {
-        response.arrayBuffer().then(function (buffer) {
-          const url = window.URL.createObjectURL(new Blob([buffer]));
-          const element = document.createElement('a');
-          element.href = url;
-          element.setAttribute('download', 'image.png');
-          document.body.appendChild(element);
-          element.click();
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  function forceDownload(blob, filename) {
+    // Create an invisible anchor element
+    const anchor = document.createElement('a');
+    anchor.style.display = 'none';
+    anchor.href = window.URL.createObjectURL(blob);
+    anchor.setAttribute('download', filename);
+    document.body.appendChild(anchor);
 
+    // Trigger the download by simulating click
+    anchor.click();
+
+    // Clean up
+    window.URL.revokeObjectURL(anchor.href);
+    document.body.removeChild(anchor);
+  }
+
+  function download(url, filename) {
+    // If no filename is set, use filename from URL
+    if (!filename) filename = url.match(/\/([^/#?]+)[^/]*$/)[1];
+
+    fetch(url, {
+      headers: new Headers({
+        Origin: window.location.origin,
+      }),
+      mode: 'cors',
+    })
+      .then((response) => response.blob())
+      .then((blob) => forceDownload(blob, filename))
+      .catch((e) => console.error(e));
+  }
   return (
-    <button
-      css={button}
-      href={customMeme}
-      download
-      onClick={(e) => download(e)}
-    >
+    <button css={button} href={customMeme} onClick={() => download(customMeme)}>
       Download meme
     </button>
   );
