@@ -17,6 +17,7 @@ const button = css`
 
 function DownloadButton({ customMeme }) {
   function forceDownload(blob, filename) {
+    // blob is a file-like object of immutable, raw data, can be read as text or binary data
     // Create an invisible anchor element
     const anchor = document.createElement('a');
     anchor.style.display = 'none';
@@ -34,13 +35,13 @@ function DownloadButton({ customMeme }) {
 
   function download(url, filename) {
     // If no filename is set, use filename from URL
-    if (!filename) filename = url.match(/\/([^/#?]+)[^/]*$/)[1];
+    if (!filename) filename = url.match(/\/([^/#?]+)[^/]*$/)[1]; // some weird regex code?
 
     fetch(url, {
       headers: new Headers({
         Origin: window.location.origin,
       }),
-      mode: 'cors',
+      mode: 'cors', // request mode value, cors allows cross-origin requests
     })
       .then((response) => response.blob())
       .then((blob) => forceDownload(blob, filename))
@@ -48,7 +49,7 @@ function DownloadButton({ customMeme }) {
   }
   return (
     <button css={button} href={customMeme} onClick={() => download(customMeme)}>
-      Download meme
+      Download
     </button>
   );
 }
