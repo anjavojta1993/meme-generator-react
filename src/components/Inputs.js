@@ -1,3 +1,5 @@
+import '../App.css';
+
 function Inputs({
   image,
   topText,
@@ -19,13 +21,14 @@ function Inputs({
   }
 
   return (
-    <>
+    <div className="Inputs">
       <label htmlFor="character">
         Enter a character:
         <input
           className="userInput"
           type="text"
           id="character"
+          placeholder="e.g. saltbae"
           value={image}
           onChange={handleChangeImage}
         />
@@ -38,6 +41,7 @@ function Inputs({
           className="userInput"
           type="text"
           id="top-text"
+          placeholder="e.g. Let me"
           value={topText}
           onChange={handleChangeTopText}
         />
@@ -49,11 +53,12 @@ function Inputs({
           className="userInput"
           type="text"
           id="bottom-text"
+          placeholder="e.g. Salt you"
           value={bottomText}
           onChange={handleChangeBottomText}
         />
       </label>
-    </>
+    </div>
   );
 }
 
