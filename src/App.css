@@ -27,15 +27,26 @@ section {
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-height: 600px;
+  max-height: 650px;
   width: 500px;
   margin: 10px;
+}
+
+.userInput {
+  margin-left: 10px;
+  margin-bottom: 10px;
 }
 
 .meme {
   max-height: 300px;
 }
 
-.userInput {
-  margin-left: 10px;
+@media screen and (max-width: 400px) {
+  section {
+    width: 100vh;
+    box-sizing: border-box;
+    border-radius: 0;
+    height: 100vh;
+    justify-content: center;
+  }
 }
